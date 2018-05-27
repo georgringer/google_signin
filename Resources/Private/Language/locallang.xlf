@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-06-02T11:48:40Z" product-name="google_signin">
+		<header/>
+		<body>
+			<trans-unit id="backendLogin.switch.label" xml:space="preserve">
+				<source>Sign in with Google</source>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>

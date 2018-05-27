@@ -2,6 +2,8 @@
 
 This extension makes it possible to sign in in your TYPO3 websites by your google account. Less passwords, faster logins
 
+**Not ready to use for production *yet*!**
+
 ## Requirement
 
 - TYPO3 CMS 8+
@@ -12,45 +14,48 @@ This extension makes it possible to sign in in your TYPO3 websites by your googl
 
 ## Create an account on Google Cloud Platform
 
-1st) Go to https://console.cloud.google.com/ and create a new project.
+Go to https://console.cloud.google.com/ and create a new project.
 
-### create credentials
+### Create credentials
 
-switch to **credentials** and click button **create credentials** and choose *oauth client ID*
+Switch to **credentials** and click button **create credentials** and choose *oauth client ID*
 
-step-create-credentials.png
+![step-create-credentials.png](Resources/Public/Documentation/Screenshots/step-create-credentials.png)
 
-- application type: web application
-- authorized javascript origins: add domain(s)
+Fill in the following options:
 
-step-create-client.png
+- Application type: web application
+- Authorized JavaScript origins: Add all domains you are using
 
-=> client id
+![step-create-client.png](Resources/Public/Documentation/Screenshots/step-create-client.png)
 
-step-create-client-created.png
+**Remember the client ID, you will need it later*
 
-### authorize ownership
+![step-oauth-client-created.png](Resources/Public/Documentation/Screenshots/step-oauth-client-created.png)
 
-go to https://www.google.com/webmasters/tools/home?hl=EN and add site by clicking button **add property**
+### Authorize Ownership
 
-add domain.
+Go to https://www.google.com/webmasters/tools/home?hl=EN and add site by clicking button **add property**
 
-only the recommended method *HTML file upload* is supported. follow the instructions and press button **verify**.
+Add your domain.
 
-## install extension
+**Important**: Only the recommended method *HTML file upload* is supported. follow the instructions and press button **verify**.
 
-install extension as usual.
+## Install extension
 
-### configuration
+Install extension as usual.
 
-in em:
+### Configuration
 
-- add client id
-- enable be
+The settings in the extension manager are required:
+
+- Add the client ID
+- Enable BE/FE
 
 # todos
 
 - check ssl
+- composer.json
 - stabilize service
     - logs
     - validate in own package

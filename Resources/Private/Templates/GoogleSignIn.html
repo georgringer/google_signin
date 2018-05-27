@@ -1,0 +1,90 @@
+<f:layout name="Login"/>
+
+<f:section name="loginFormFields">
+
+    <div class="pull-right" id="my-signin2"></div>
+    <h1>
+        {f:translate(key:'LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:backendLogin.switch.label')}</h1>
+
+    <input type="hidden" name="google-signin" value="1"/>
+    <input type="hidden" id="google-token" name="google-token" value=""/>
+    <div class="row" id="google-infos" style="display: none">
+        <div class="col-xs-5">
+            <img id="profileImage" src="" class="img-responsive img-circle"/>
+        </div>
+        <div class="col-xs-7">
+            <div id="google-info-text"></div>
+            <div id="google-info-links">
+                <a href="#" onclick="signOut();" style="display: none">Sign out</a>
+                <a href="#" class="btn btn-info" onclick="disconnect();">Disconnect</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script>
+        function onSuccess(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            setProfileImage(profile.getImageUrl());
+            setProfileText(profile);
+            document.getElementById('google-token').value = googleUser.getAuthResponse().id_token;
+            document.getElementById('google-infos').removeAttribute('style');
+            document.getElementById('google-info-links').removeAttribute('style');
+        }
+
+        function setProfileText(profile) {
+            var message = '<h4>' + profile.getName() + '</h4>'
+                + profile.getEmail();
+
+            document.getElementById("google-info-text").innerHTML = message;
+        }
+
+        function onFailure(error) {
+            console.log(error);
+        }
+
+        function renderButton() {
+            gapi.signin2.render('my-signin2', {
+                'scope': 'profile email',
+                // 'width': 240,
+                // 'height': 50,
+                'longtitle': false,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+
+        function setProfileImage(srcUrl) {
+            var element = document.getElementById("profileImage");
+            if (srcUrl == null) {
+                element.style.display = "none";
+                element.src = "";
+            } else {
+                element.style.display = "block";
+                element.src = srcUrl;
+            }
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                // console.log('User signed out.');
+                document.getElementById("google-info-text").innerHTML = '';
+                document.getElementById("google-info-links").style.display = "none";
+                document.getElementById("profileImage").style.display = "none";
+            });
+        }
+
+        function disconnect() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.disconnect().then(function () {
+                // console.log('User signed out.');
+                document.getElementById("google-info-text").innerHTML = '';
+                document.getElementById("google-info-links").style.display = "none";
+                document.getElementById("profileImage").style.display = "none";
+            });
+        }
+
+    </script>
+</f:section>
