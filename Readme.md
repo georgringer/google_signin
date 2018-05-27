@@ -55,7 +55,6 @@ The settings in the extension manager are required:
 # todos
 
 - check ssl
-- composer.json
 - stabilize service
     - logs
     - validate in own package
