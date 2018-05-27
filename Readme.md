@@ -2,6 +2,8 @@
 
 This extension makes it possible to sign in in your TYPO3 websites by your google account. Less passwords, faster logins
 
+![google_signin.gif](Resources/Public/Documentation/Screenshots/google_signin.gif)
+
 **Not ready to use for production *yet*!**
 
 ## Requirement
@@ -43,7 +45,7 @@ Add your domain.
 
 ## Install extension
 
-Install extension as usual.
+Install extension as usual. Use composer with `composer require georgringer/google-signin` or get it from TER (tbd).
 
 ### Configuration
 
@@ -54,7 +56,6 @@ The settings in the extension manager are required:
 
 # todos
 
-- check ssl
 - stabilize service
     - logs
     - validate in own package
@@ -62,4 +63,5 @@ The settings in the extension manager are required:
 - error in js
 - docs
 - testing
+- creating of phar file
 - auto create user for business
