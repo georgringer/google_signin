@@ -1,0 +1,11 @@
+# cat=basic/enable/22; type=string; label=Client ID
+clientId =
+
+# cat=basic/enable/26; type=boolean; label=Enable FE
+enableFE = 0
+
+# cat=basic/enable/27; type=boolean; label=Enable BE
+enableBE = 0
+
+# cat=basic/enable/50; type=string; label=auto create for user from following organization
+automaticUserCreationForOrganization =

@@ -65,3 +65,4 @@ The settings in the extension manager are required:
 - testing
 - creating of phar file
 - auto create user for business
+- sync avatar

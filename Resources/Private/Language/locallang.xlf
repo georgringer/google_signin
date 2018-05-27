@@ -6,7 +6,6 @@
 			<trans-unit id="backendLogin.switch.label" xml:space="preserve">
 				<source>Sign in with Google</source>
 			</trans-unit>
-
 		</body>
 	</file>
 </xliff>
