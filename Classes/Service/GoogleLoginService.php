@@ -28,6 +28,8 @@ class GoogleLoginService extends AbstractService
      */
     protected $authenticationInformation = [];
 
+    /** @var TimeTracker */
+    protected $timeTracker;
 
     public function init()
     {
@@ -194,9 +196,10 @@ class GoogleLoginService extends AbstractService
         if (TYPO3_MODE === 'BE') {
             GeneralUtility::sysLog($message, $this->extKey, GeneralUtility::SYSLOG_SEVERITY_NOTICE);
         } else {
-            /** @var TimeTracker $tt */
-            $tt = $GLOBALS['TT'];
-            $tt->setTSlogMessage($message);
+            if (is_null($this->timeTracker)) {
+                $this->timeTracker = GeneralUtility::makeInstance(TimeTracker::class);
+            }
+            $this->timeTracker->setTSlogMessage($message);
         }
         if ($GLOBALS['TYPO3_CONF_VARS']['SYS']['enable_DLOG']) {
             GeneralUtility::devLog($message, $this->extKey, GeneralUtility::SYSLOG_SEVERITY_NOTICE);

@@ -27,7 +27,7 @@ class GoogleSignInProvider implements LoginProviderInterface
      */
     public function render(StandaloneView $view, PageRenderer $pageRenderer, LoginController $loginController)
     {
-        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:google_signin/Resources/Private/Templates/GoogleSignIn.html'));
+        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:google_signin/Resources/Private/Templates/Backend.html'));
         $view->assignMultiple([
             'errorCodes' => $this->getErrorCodes()
         ]);

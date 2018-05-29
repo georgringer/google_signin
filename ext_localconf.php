@@ -6,6 +6,9 @@ $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\
 $subTypes = [];
 if ($extensionConfiguration->getEnableFE()) {
     $subTypes[] = 'getUserFE,authUserFE';
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['felogin']['postProcContent']['google_signin'] =
+        \GeorgRinger\GoogleSignin\Hooks\Felogin\ContentPostProcHook::class . '->run';
 }
 if ($extensionConfiguration->getEnableBE()) {
     $subTypes[] = 'getUserBE,authUserBE';
