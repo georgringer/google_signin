@@ -25,7 +25,7 @@ class ExtensionConfiguration implements SingletonInterface
     {
         $settings = (array)unserialize((string)$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['google_signin'], ['allowed_classes' => false]);
         if (!empty($settings)) {
-            $this->clientId = $settings['clientId'];
+            $this->clientId = (string)$settings['clientId'];
             $this->enableBE = (bool)$settings['enableBE'];
             $this->enableFE = (bool)$settings['enableFE'];
             $this->automaticUserCreationForOrganization = (string)$settings['automaticUserCreationForOrganization'];
