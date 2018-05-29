@@ -8,7 +8,6 @@ namespace GeorgRinger\GoogleSignin\Tests\Unit\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-
 use GeorgRinger\GoogleSignin\Domain\Model\Dto\ExtensionConfiguration;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 

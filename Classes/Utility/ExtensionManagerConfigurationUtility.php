@@ -8,7 +8,6 @@ namespace GeorgRinger\GoogleSignin\Utility;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -17,7 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ExtensionManagerConfigurationUtility
 {
-
     public function getUserTemplate(array $params): string
     {
         $userRows = $this->getBeUsers((int)$params['fieldValue']);
