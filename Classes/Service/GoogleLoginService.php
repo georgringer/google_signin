@@ -3,7 +3,6 @@
 namespace GeorgRinger\GoogleSignin\Service;
 
 use GeorgRinger\GoogleSignin\Domain\Model\Dto\ExtensionConfiguration;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\AbstractUserAuthentication;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -107,26 +106,18 @@ class GoogleLoginService extends AbstractService
             return null;
         }
 
-
         $userRecord = $this->getUserRecord($this->googleResponse['email']);
 
         if (!empty($userRecord) && is_array($userRecord)) {
-            // The above function will return user record from the OpenID. It means that
-            // user actually tried to authenticate using his OpenID. In this case
-            // we must change the password in the record to a long random string so
-            // that this user cannot be authenticated with other service.
-//            $userRecord[$this->authenticationInformation['db_user']['userident_column']] = GeneralUtility::makeInstance(Random::class)->generateRandomHexString(42);
-//            $this->writeLog('User \'%s\' logged in with OpenID \'%s\'', $userRecord[$this->parentObject->formfield_uname], $openIDIdentifier);
+            $this->writeLog('User \'%s\' logged in with google login \'%s\'', $userRecord[$this->parentObject->formfield_uname], $this->googleResponse['email']);
         } else {
-//            die('fialed');
             $this->writeLog('Failed to login user using google login \'%s\'', $this->googleResponse['email']);
         }
-
 
         return $userRecord;
     }
 
-    protected function getUserRecord(string $email)
+    protected function getUserRecord(string $email): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->authenticationInformation['db_user']['table']);
         $queryBuilder->getRestrictions()->removeAll();
@@ -146,7 +137,8 @@ class GoogleLoginService extends AbstractService
 
         $count = count($records);
         if ($count > 1) {
-            die('too many records found for email adr' . $email);
+            $this->writeLog('Too many records found for email address "%s".', $this->googleResponse['email']);
+            return [];
         }
         if ($count === 1) {
             return $records[0];
@@ -156,7 +148,7 @@ class GoogleLoginService extends AbstractService
     }
 
     /**
-     * Authenticates user using OpenID.
+     * Authenticates user
      *
      * @param array $userRecord User record
      * @return int Code that shows if user is really authenticated.
@@ -165,15 +157,14 @@ class GoogleLoginService extends AbstractService
     {
         $result = 100;
         // 100 means "we do not know, continue"
-        if ($userRecord['tx_openid_openid'] !== '') {
-            // Check if user is identified by the OpenID
-            if (!empty($this->googleResponse)) {
+        if (!empty($this->googleResponse)) {
+            if ($this->googleResponse['email'] === $userRecord['email']) {
                 $result = 200;
-
-
             } else {
-                $this->writeLog('google login authentication failed');
+                $this->writeLog('google login authentication failed2');
             }
+        } else {
+            $this->writeLog('google login authentication failed');
         }
         return $result;
     }
