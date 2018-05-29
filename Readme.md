@@ -54,15 +54,6 @@ The settings in the extension manager are required:
 - Add the client ID
 - Enable BE/FE
 
-# todos
+# Bugs & upcoming features
 
-- stabilize service
-    - logs
-    - validate in own package
-- fe auth
-- error in js
-- docs
-- testing
-- creating of phar file
-- auto create user for business
-- sync avatar
+Take a look at the open issues at https://github.com/georgringer/google_signin/issues.
