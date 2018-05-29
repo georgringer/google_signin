@@ -3,6 +3,7 @@
 namespace GeorgRinger\GoogleSignin\LoginProvider;
 
 use GeorgRinger\GoogleSignin\Domain\Model\Dto\ExtensionConfiguration;
+use GeorgRinger\GoogleSignin\Service\StatusService;
 use TYPO3\CMS\Backend\Controller\LoginController;
 use TYPO3\CMS\Backend\LoginProvider\LoginProviderInterface;
 use TYPO3\CMS\Core\Page\PageRenderer;
@@ -28,28 +29,16 @@ class GoogleSignInProvider implements LoginProviderInterface
     public function render(StandaloneView $view, PageRenderer $pageRenderer, LoginController $loginController)
     {
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:google_signin/Resources/Private/Templates/Backend.html'));
-        $view->assignMultiple([
-            'errorCodes' => $this->getErrorCodes()
-        ]);
 
+        try {
+            StatusService::isEnabled('BE');
+        } catch (\GeorgRinger\GoogleSignin\Error\ConfigurationException $e) {
+            $view->assignMultiple([
+                'error' => $e
+            ]);
+        }
         $pageRenderer->addHeaderData(
             '<meta name="google-signin-client_id" content="' . $this->extensionConfiguration->getClientId() . '">'
         );
-    }
-
-    /**
-     * @return array
-     */
-    protected function getErrorCodes(): array
-    {
-        $errorCodes = [];
-        if (!$this->extensionConfiguration->getClientId()) {
-            $errorCodes[] = 'noCLientId';
-        }
-        if (!GeneralUtility::getIndpEnv('TYPO3_SSL')) {
-            $errorCodes[] = 'noTls';
-        }
-
-        return $errorCodes;
     }
 }

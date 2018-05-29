@@ -6,13 +6,10 @@
         {f:translate(key:'LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:backendLogin.switch.label')}
     </h1>
 
-    <f:if condition="{errorCodes}">
+    <f:if condition="{error}">
         <f:then>
             <div class="alert alert-danger">
-                <f:for each="{errorCodes}" as="error">
-                    {f:translate(key:'LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:error.{error}',default:error)}
-                    <br>
-                </f:for>
+                {f:translate(key:'LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:error.{error.code}',default:error.message)}
             </div>
         </f:then>
         <f:else>

@@ -3,6 +3,7 @@
 namespace GeorgRinger\GoogleSignin\Hooks\Felogin;
 
 use GeorgRinger\GoogleSignin\Domain\Model\Dto\ExtensionConfiguration;
+use GeorgRinger\GoogleSignin\Service\StatusService;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Felogin\Controller\FrontendLoginController;
@@ -21,25 +22,48 @@ class ContentPostProcHook
 
     public function run(&$params, FrontendLoginController $frontendLoginController)
     {
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->addHeaderData(
-            '<meta name="google-signin-client_id" content="' . $this->extensionConfiguration->getClientId() . '">'
-        );
         $content = $params['content'];
+        if (!$this->extensionConfiguration->getEnableFE()) {
+            $content = str_replace(['###GOOGLE_SIGNIN_SWITCH_LINK###', '###GOOGLE_SIGNIN_CONTENT###'], '', $content);
+            return $content;
+        }
 
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->getRequest()->setControllerExtensionName('google_login');
-        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:google_signin/Resources/Private/Templates/Frontend.html'));
+        $this->setMetaTag();
 
-        $additionalContent = $view->render();
+        $additionalContent = $this->getView()->render();
 
         $searchReplace = [
             '###GOOGLE_SIGNIN_SWITCH_LINK###' => '<a href="javascript:loadSrc();">try google login</a>',
             '###GOOGLE_SIGNIN_CONTENT###' => $additionalContent
         ];
 
-
         $content = str_replace(array_keys($searchReplace), array_values($searchReplace), $content);
         return $content;
+    }
+
+    protected function setMetaTag()
+    {
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+        $pageRenderer->addHeaderData(
+            '<meta name="google-signin-client_id" content="' . $this->extensionConfiguration->getClientId() . '">'
+        );
+    }
+
+    /**
+     * @return StandaloneView
+     */
+    protected function getView(): StandaloneView
+    {
+        $view = GeneralUtility::makeInstance(StandaloneView::class);
+        try {
+            StatusService::isEnabled('FE');
+        } catch (\GeorgRinger\GoogleSignin\Error\ConfigurationException $e) {
+            $view->assignMultiple([
+                'error' => $e
+            ]);
+        }
+        $view->getRequest()->setControllerExtensionName('google_login');
+        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:google_signin/Resources/Private/Templates/Frontend.html'));
+        return $view;
     }
 }
