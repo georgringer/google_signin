@@ -16,7 +16,7 @@ use UnexpectedValueException;
 
 class StatusServiceTest extends UnitTestCase
 {
-    
+
     /**
      * @test
      * @expectedException UnexpectedValueException

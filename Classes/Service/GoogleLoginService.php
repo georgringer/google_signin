@@ -201,8 +201,5 @@ class GoogleLoginService extends AbstractService
             }
             $this->timeTracker->setTSlogMessage($message);
         }
-        if ($GLOBALS['TYPO3_CONF_VARS']['SYS']['enable_DLOG']) {
-            GeneralUtility::devLog($message, $this->extKey, GeneralUtility::SYSLOG_SEVERITY_NOTICE);
-        }
     }
 }
