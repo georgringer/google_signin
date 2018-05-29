@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace GeorgRinger\GoogleSignin\Domain\Model\Dto;
 
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ExtensionConfiguration implements SingletonInterface
 {
