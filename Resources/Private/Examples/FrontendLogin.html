@@ -50,23 +50,28 @@
 <form action="###ACTION_URI###" target="_top" method="post" onsubmit="###ON_SUBMIT###">
 	<fieldset>
 	<legend>###LEGEND###</legend>
-	<div>
-		<label for="user">###USERNAME_LABEL###</label>
-		<input type="text" id="user" name="user" value="" />
-	</div>
-	<div>
-		<label for="pass">###PASSWORD_LABEL###</label>
-		<input type="password" id="pass" name="pass" value="" data-rsa-encryption="" />
-	</div>
 
-	<!--###PERMALOGIN_VALID###-->
-		<div>
-			<label for="permalogin">###PERMALOGIN###</label>
-			<input name="permalogin" value="0" type="hidden" ###PERMALOGIN_HIDDENFIELD_ATTRIBUTES### id="permaloginHiddenField" />
-			<input name="permalogin" value="1" type="checkbox" ###PERMALOGIN_CHECKBOX_ATTRIBUTES### id="permalogin"  onclick="document.getElementById('permaloginHiddenField').disabled = this.checked;" />
-		</div>
-	<!--###PERMALOGIN_VALID###-->
 
+		<div id="login-regular">
+            <div>
+                <label for="user">###USERNAME_LABEL###</label>
+                <input type="text" id="user" name="user" value=""/>
+            </div>
+            <div>
+                <label for="pass">###PASSWORD_LABEL###</label>
+                <input type="password" id="pass" name="pass" value="" data-rsa-encryption=""/>
+            </div>
+
+            <!--###PERMALOGIN_VALID###-->
+            <div>
+                <label for="permalogin">###PERMALOGIN###</label>
+                <input name="permalogin" value="0" type="hidden" ###PERMALOGIN_HIDDENFIELD_ATTRIBUTES###
+                       id="permaloginHiddenField"/>
+                <input name="permalogin" value="1" type="checkbox" ###PERMALOGIN_CHECKBOX_ATTRIBUTES### id="permalogin"
+                       onclick="document.getElementById('permaloginHiddenField').disabled = this.checked;"/>
+            </div>
+            <!--###PERMALOGIN_VALID###-->
+        </div>
 		###GOOGLE_SIGNIN_SWITCH_LINK###
 
 	<div>

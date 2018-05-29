@@ -33,7 +33,10 @@ class ContentPostProcHook
         $additionalContent = $this->getView()->render();
 
         $searchReplace = [
-            '###GOOGLE_SIGNIN_SWITCH_LINK###' => '<a href="javascript:loadSrc();">try google login</a>',
+            '###GOOGLE_SIGNIN_SWITCH_LINK###' => '<label for="google-signin">
+        <input type="checkbox" name="google-signin" id="google-signin" value="1"/>
+            Use google signin
+        </label>',
             '###GOOGLE_SIGNIN_CONTENT###' => $additionalContent
         ];
 
