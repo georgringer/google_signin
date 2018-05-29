@@ -52,7 +52,7 @@ class GoogleLoginService extends AbstractService
         $this->authenticationInformation = $authenticationInformation;
 
         $postVars = GeneralUtility::_POST();
-        if ($postVars && isset($postVars['google-token'])) {
+        if (isset($postVars['google-signin']) && (int)$postVars['google-signin'] === 1 && isset($postVars['google-token'])) {
             $token = $postVars['google-token'];
             if ($token) {
                 $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
