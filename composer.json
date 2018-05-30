@@ -50,7 +50,7 @@
   "scripts": {
     "post-autoload-dump": [
       "mkdir -p .Build/Web/typo3conf/ext/",
-      "[ -L .Build/Web/typo3conf/ext/google_signin ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/news"
+      "[ -L .Build/Web/typo3conf/ext/google_signin ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/google_signin"
     ]
   },
   "extra": {
