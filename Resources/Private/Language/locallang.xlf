@@ -6,6 +6,18 @@
 			<trans-unit id="backendLogin.switch.label" xml:space="preserve">
 				<source>Sign in with Google</source>
 			</trans-unit>
+			<trans-unit id="error.1527560543" xml:space="preserve">
+				<source>SSL (https) is required to be able to use google sign in</source>
+			</trans-unit>
+			<trans-unit id="error.1527560544" xml:space="preserve">
+				<source>No client ID is set. Check the manual for help</source>
+			</trans-unit>
+			<trans-unit id="sign_out" xml:space="preserve">
+				<source>Sign out</source>
+			</trans-unit>
+			<trans-unit id="disconnect" xml:space="preserve">
+				<source>Disconnect</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
