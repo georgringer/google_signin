@@ -54,6 +54,9 @@ The settings in the extension manager are required:
 - Add the client ID
 - Enable BE/FE
 
+For organsations, add your organisation name and choose an existing backend user as a template for new users.
+A new user will automatically be created when logging in with a google account assigned to the organisation. 
+
 # Bugs & upcoming features
 
 Take a look at the open issues at https://github.com/georgringer/google_signin/issues.

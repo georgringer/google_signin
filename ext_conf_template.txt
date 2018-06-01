@@ -7,8 +7,14 @@ enableFE = 0
 # cat=basic/enable/27; type=boolean; label=Enable BE
 enableBE = 0
 
-# cat=autoSetup/enable/50; type=string; label=Auto create for user from following organization
-automaticUserCreationForOrganization =
+# cat=autoSetup/enable/50; type=string; label=Auto create for be user from following organization
+beAutomaticUserCreationForOrganization =
 
-# cat=autoSetup/enable/52; type=user[GeorgRinger\GoogleSignin\Utility\ExtensionManagerConfigurationUtility->getUserTemplate]; label=Select user which serves as template
-automaticUserCreationTemplate = 0
+# cat=autoSetup/enable/52; type=user[GeorgRinger\GoogleSignin\Utility\ExtensionManagerConfigurationUtility->getBackendUserTemplate]; label=Select be user which serves as template
+beAutomaticUserCreationTemplate = 0
+
+# cat=autoSetup/enable/54; type=string; label=Auto create for fe user from following organization
+feAutomaticUserCreationForOrganization =
+
+# cat=autoSetup/enable/56; type=user[GeorgRinger\GoogleSignin\Utility\ExtensionManagerConfigurationUtility->getFrontendUserTemplate]; label=Select fe user which serves as template
+feAutomaticUserCreationTemplate = 0
