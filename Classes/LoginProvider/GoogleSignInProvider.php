@@ -29,13 +29,14 @@ class GoogleSignInProvider implements LoginProviderInterface
     public function render(StandaloneView $view, PageRenderer $pageRenderer, LoginController $loginController)
     {
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName('EXT:google_signin/Resources/Private/Templates/Backend.html'));
+        $view->assignMultiple([
+            'LLL' => 'LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:'
+        ]);
 
         try {
             StatusService::isEnabled('BE');
         } catch (\GeorgRinger\GoogleSignin\Error\ConfigurationException $e) {
-            $view->assignMultiple([
-                'error' => $e
-            ]);
+            $view->assign('error', $e);
         }
         $pageRenderer->addHeaderData(
             '<meta name="google-signin-client_id" content="' . $this->extensionConfiguration->getClientId() . '">'

@@ -34,6 +34,5 @@ class StatusService
             return $extensionConfiguration->getEnableBE();
         }
         return $extensionConfiguration->getEnableFE();
-
     }
 }

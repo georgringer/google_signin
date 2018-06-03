@@ -6,6 +6,45 @@
 			<trans-unit id="backendLogin.switch.label" xml:space="preserve">
 				<source>Sign in with Google</source>
 			</trans-unit>
+			<trans-unit id="em.clientId" xml:space="preserve">
+				<source>Client ID</source>
+			</trans-unit>
+			<trans-unit id="em.enableFE" xml:space="preserve">
+				<source>Enable usage in Frontend:Extends EXT:felogin to let website users authenticate with their email address listed at Google.</source>
+			</trans-unit>
+			<trans-unit id="em.enableBE" xml:space="preserve">
+				<source>Enable Usage in Backend:Let Backend Users authenticate them with their email address listed at Google.</source>
+			</trans-unit>
+			<trans-unit id="em.beAutomaticUserCreationForOrganization" xml:space="preserve">
+				<source>beAutomaticUserCreationForOrganization</source>
+			</trans-unit>
+			<trans-unit id="em.beAutomaticUserCreationTemplate" xml:space="preserve">
+				<source>TBD Select be user which serves as template</source>
+			</trans-unit>
+			<trans-unit id="em.feAutomaticUserCreationForOrganization" xml:space="preserve">
+				<source>feAutomaticUserCreationForOrganization</source>
+			</trans-unit>
+			<trans-unit id="em.feAutomaticUserCreationTemplate" xml:space="preserve">
+				<source>TBD Select fe user which serves as template</source>
+			</trans-unit>
+			<trans-unit id="em.beAutomaticUserCreationTemplate.admins" xml:space="preserve">
+				<source>Administrators</source>
+			</trans-unit>
+			<trans-unit id="em.beAutomaticUserCreationTemplate.editors" xml:space="preserve">
+				<source>Editors</source>
+			</trans-unit>
+			<trans-unit id="error.1527560543" xml:space="preserve">
+				<source>SSL (https) is required to be able to use google sign in</source>
+			</trans-unit>
+			<trans-unit id="error.1527560544" xml:space="preserve">
+				<source>No client ID is set. Check the manual for help</source>
+			</trans-unit>
+			<trans-unit id="sign_out" xml:space="preserve">
+				<source>Sign out</source>
+			</trans-unit>
+			<trans-unit id="disconnect" xml:space="preserve">
+				<source>Disconnect</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -23,7 +23,7 @@ if ($extensionConfiguration->getEnableBE()) {
 
 if (!empty($subTypes)) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService(
-        'openid',
+        'google_signin',
         'auth',
         'tx_googlelogin_service',
         [

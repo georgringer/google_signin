@@ -8,7 +8,6 @@ namespace GeorgRinger\GoogleSignin\Tests\Unit\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-
 use GeorgRinger\GoogleSignin\Service\StatusService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -37,8 +36,6 @@ class StatusServiceTest extends UnitTestCase
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['reverseProxySSL'] = '*';
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['reverseProxyIP'] = GeneralUtility::getIndpEnv('REMOTE_ADDR');
 
-
         StatusService::isEnabled('FE');
     }
-
 }

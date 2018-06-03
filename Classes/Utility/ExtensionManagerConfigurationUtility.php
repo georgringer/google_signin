@@ -8,7 +8,6 @@ namespace GeorgRinger\GoogleSignin\Utility;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -17,20 +16,20 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ExtensionManagerConfigurationUtility
 {
-
     public function getBackendUserTemplate(array $params): string
     {
         $userRows = $this->getBeUsers((int)$params['fieldValue']);
 
         $html = '<select class="form-control" name="' . $params['fieldName'] . '"><option value="0"></option>';
         if ($userRows[1]) {
-            $html .= '<optgroup label="Admins">' . implode(LF, $userRows[1]) . '</optgroup>';
+            $label = $this->translate('em.beAutomaticUserCreationTemplate.admins');
+            $html .= '<optgroup label="' . $label . '">' . implode(LF, $userRows[1]) . '</optgroup>';
         }
         if ($userRows[0]) {
-            $html .= '<optgroup label="Editors">' . implode(LF, $userRows[0]) . '</optgroup>';
+            $label = $this->translate('em.beAutomaticUserCreationTemplate.editors');
+            $html .= '<optgroup label="' . $label . '">' . implode(LF, $userRows[0]) . '</optgroup>';
         }
         $html .= '</select>';
-
 
         return $html;
     }
@@ -104,5 +103,10 @@ class ExtensionManagerConfigurationUtility
         }
 
         return $rows;
+    }
+
+    protected function translate(string $key): string
+    {
+        return htmlspecialchars($GLOBALS['LANG']->sL('LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:' . $key));
     }
 }

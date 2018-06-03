@@ -3,6 +3,7 @@
 namespace GeorgRinger\GoogleSignin\Service;
 
 use GeorgRinger\GoogleSignin\Domain\Model\Dto\ExtensionConfiguration;
+use GeorgRinger\GoogleSignin\Error\ConfigurationException;
 use GeorgRinger\GoogleSignin\UserProvider\BackendUserProvider;
 use GeorgRinger\GoogleSignin\UserProvider\FrontendUserProvider;
 use GeorgRinger\GoogleSignin\UserProvider\UserProviderInterface;
@@ -10,11 +11,9 @@ use TYPO3\CMS\Core\Authentication\AbstractUserAuthentication;
 use TYPO3\CMS\Core\Service\AbstractService;
 use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use GeorgRinger\GoogleSignin\Error\ConfigurationException;
 
 class GoogleLoginService extends AbstractService
 {
-
     protected $extKey = 'google_signin';
 
     /**
@@ -166,7 +165,6 @@ class GoogleLoginService extends AbstractService
         }
         return $result;
     }
-
 
     /**
      * Writes log message. Destination log depends on the current system mode.

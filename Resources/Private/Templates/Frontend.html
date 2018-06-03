@@ -1,7 +1,4 @@
 <div class="pull-right" id="my-signin2"></div>
-<h1>
-    {f:translate(key:'LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:backendLogin.switch.label')}
-</h1>
 
 <f:if condition="{error}">
     <f:then>
@@ -10,7 +7,7 @@
         </div>
     </f:then>
     <f:else>
-        <input type="checkbox" name="google-signin" value="1"/>
+
         <input type="hidden" id="google-token" name="google-token" value=""/>
         <div class="row" id="google-infos" style="display: none">
             <div class="col-xs-5">
@@ -24,8 +21,8 @@
                 </div>
             </div>
         </div>
-        <hr>
         <script>
+            var googleLoginIsEnabled = false;
             function onSuccess(googleUser) {
                 var profile = googleUser.getBasicProfile();
                 setProfileImage(profile.getImageUrl());
@@ -98,6 +95,20 @@
 
                 document.head.appendChild(script)
             }
+
+            document.getElementById("google-signin").addEventListener( 'change', function() {
+                if(this.checked) {
+                    document.getElementById("login-regular").style.display = "none";
+                    document.getElementById("google-infos").style.display = "block";
+                } else {
+                    document.getElementById("login-regular").style.display = "block";
+                    document.getElementById("google-infos").style.display = "none";
+                }
+                if (!googleLoginIsEnabled) {
+                    loadSrc();
+                    googleLoginIsEnabled = true;
+                }
+            });
 
         </script>
     </f:else>
