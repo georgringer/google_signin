@@ -7,8 +7,15 @@ enableFE = 0
 # cat=basic/enable/27; type=boolean; label=LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:em.enableBE
 enableBE = 0
 
-# cat=autoSetup/enable/50; type=string; label=LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:em.automaticUserCreationForOrganization
-automaticUserCreationForOrganization =
+# cat=autoSetup/enable/50; type=string; label=LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:em.beAutomaticUserCreationForOrganization
+beAutomaticUserCreationForOrganization =
 
-# cat=autoSetup/enable/52; type=user[GeorgRinger\GoogleSignin\Utility\ExtensionManagerConfigurationUtility->getUserTemplate]; label=LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:em.automaticUserCreationTemplate
-automaticUserCreationTemplate = 0
+# cat=autoSetup/enable/52; type=user[GeorgRinger\GoogleSignin\Utility\ExtensionManagerConfigurationUtility->getBackendUserTemplate]; label=LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:em.beAutomaticUserCreationTemplate
+beAutomaticUserCreationTemplate = 0
+
+# cat=autoSetup/enable/54; type=string; label=LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:em.feAutomaticUserCreationForOrganization
+feAutomaticUserCreationForOrganization =
+
+# cat=autoSetup/enable/56; type=user[GeorgRinger\GoogleSignin\Utility\ExtensionManagerConfigurationUtility->getFrontendUserTemplate]; label=LLL:EXT:google_signin/Resources/Private/Language/locallang.xlf:em.feAutomaticUserCreationForOrganization
+feAutomaticUserCreationTemplate = 0
+

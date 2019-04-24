@@ -15,16 +15,22 @@
 			<trans-unit id="em.enableBE" xml:space="preserve">
 				<source>Enable Usage in Backend:Let Backend Users authenticate them with their email address listed at Google.</source>
 			</trans-unit>
-			<trans-unit id="em.automaticUserCreationForOrganization" xml:space="preserve">
-				<source>automaticUserCreationForOrganization</source>
+			<trans-unit id="em.beAutomaticUserCreationForOrganization" xml:space="preserve">
+				<source>beAutomaticUserCreationForOrganization</source>
 			</trans-unit>
-			<trans-unit id="em.automaticUserCreationTemplate" xml:space="preserve">
-				<source>TBD Select user which serves as template</source>
+			<trans-unit id="em.beAutomaticUserCreationTemplate" xml:space="preserve">
+				<source>TBD Select be user which serves as template</source>
 			</trans-unit>
-			<trans-unit id="em.automaticUserCreationTemplate.admins" xml:space="preserve">
+			<trans-unit id="em.feAutomaticUserCreationForOrganization" xml:space="preserve">
+				<source>feAutomaticUserCreationForOrganization</source>
+			</trans-unit>
+			<trans-unit id="em.feAutomaticUserCreationTemplate" xml:space="preserve">
+				<source>TBD Select fe user which serves as template</source>
+			</trans-unit>
+			<trans-unit id="em.beAutomaticUserCreationTemplate.admins" xml:space="preserve">
 				<source>Administrators</source>
 			</trans-unit>
-			<trans-unit id="em.automaticUserCreationTemplate.editors" xml:space="preserve">
+			<trans-unit id="em.beAutomaticUserCreationTemplate.editors" xml:space="preserve">
 				<source>Editors</source>
 			</trans-unit>
 			<trans-unit id="error.1527560543" xml:space="preserve">

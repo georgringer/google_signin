@@ -63,7 +63,8 @@ The settings in the extension manager are required:
 
 - Add the client ID
 - Enable BE/FE
-
+ 
+=======
 ## Usage
 
 Using the extension is very simple:
@@ -84,6 +85,11 @@ The following changes need to be made:
 - Wrap regular fields with `<div id="login-regular">...</div>`
 - Add the marker `###GOOGLE_SIGNIN_SWITCH_LINK###` which is replaced by a link to use the Google signup
 - Add the marker `###GOOGLE_SIGNIN_CONTENT###` which is replaced by the content of google_signup like preview of user
+
+### Organisations
+
+For organsations, add your organisation name and choose an existing backend or fontend user as a template for new users.
+A new user will automatically be created when logging in with a google account assigned to the organisation.
 
 ## Debugging
 

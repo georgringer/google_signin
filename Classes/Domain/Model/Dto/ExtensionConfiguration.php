@@ -18,7 +18,16 @@ class ExtensionConfiguration implements SingletonInterface
     protected $enableBE = false;
 
     /** @var string */
-    protected $automaticUserCreationForOrganization = '';
+    protected $beAutomaticUserCreationForOrganization = '';
+
+    /** @var int */
+    protected $beAutomaticUserCreationTemplate = 0;
+
+    /** @var string */
+    protected $feAutomaticUserCreationForOrganization = '';
+
+    /** @var int */
+    protected $feAutomaticUserCreationTemplate = 0;
 
     public function __construct()
     {
@@ -27,7 +36,10 @@ class ExtensionConfiguration implements SingletonInterface
             $this->clientId = (string)$settings['clientId'];
             $this->enableBE = (bool)$settings['enableBE'];
             $this->enableFE = (bool)$settings['enableFE'];
-            $this->automaticUserCreationForOrganization = (string)$settings['automaticUserCreationForOrganization'];
+            $this->beAutomaticUserCreationForOrganization = (string)$settings['beAutomaticUserCreationForOrganization'];
+            $this->beAutomaticUserCreationTemplate = (int)$settings['beAutomaticUserCreationTemplate'];
+            $this->feAutomaticUserCreationForOrganization = (string)$settings['feAutomaticUserCreationForOrganization'];
+            $this->feAutomaticUserCreationTemplate = (int)$settings['feAutomaticUserCreationTemplate'];
         }
     }
 
@@ -58,8 +70,32 @@ class ExtensionConfiguration implements SingletonInterface
     /**
      * @return string
      */
-    public function getAutomaticUserCreationForOrganization(): string
+    public function getBeAutomaticUserCreationForOrganization(): string
     {
-        return $this->automaticUserCreationForOrganization;
+        return $this->beAutomaticUserCreationForOrganization;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBeAutomaticUserCreationTemplate(): int
+    {
+        return $this->beAutomaticUserCreationTemplate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFeAutomaticUserCreationForOrganization(): string
+    {
+        return $this->feAutomaticUserCreationForOrganization;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFeAutomaticUserCreationTemplate(): int
+    {
+        return $this->feAutomaticUserCreationTemplate;
     }
 }

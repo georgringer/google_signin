@@ -3,8 +3,11 @@
 namespace GeorgRinger\GoogleSignin\Service;
 
 use GeorgRinger\GoogleSignin\Domain\Model\Dto\ExtensionConfiguration;
+use GeorgRinger\GoogleSignin\Error\ConfigurationException;
+use GeorgRinger\GoogleSignin\UserProvider\BackendUserProvider;
+use GeorgRinger\GoogleSignin\UserProvider\FrontendUserProvider;
+use GeorgRinger\GoogleSignin\UserProvider\UserProviderInterface;
 use TYPO3\CMS\Core\Authentication\AbstractUserAuthentication;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Service\AbstractService;
 use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -28,6 +31,9 @@ class GoogleLoginService extends AbstractService
 
     /** @var TimeTracker */
     protected $timeTracker;
+
+    /** @var UserProviderInterface */
+    protected $userProvider;
 
     public function init()
     {
@@ -106,45 +112,36 @@ class GoogleLoginService extends AbstractService
             return null;
         }
 
-        $userRecord = $this->getUserRecord($this->googleResponse['email']);
+        if ($this->authenticationInformation['loginType'] === 'BE') {
+            $this->userProvider = GeneralUtility::makeInstance(BackendUserProvider::class, $this->authenticationInformation);
+        } elseif ($this->authenticationInformation['loginType'] === 'FE') {
+            $this->userProvider = GeneralUtility::makeInstance(FrontendUserProvider::class, $this->authenticationInformation);
+        } else {
+            $this->writeLog('Invalid loginType \'%s\' given. Only BE and FE is supported', $this->authenticationInformation['loginType']);
+            return null;
+        }
+
+        $userRecord = $this->userProvider->getUserByEmail($this->googleResponse['email']);
 
         if (!empty($userRecord) && is_array($userRecord)) {
             $this->writeLog('User \'%s\' logged in with google login \'%s\'', $userRecord[$this->parentObject->formfield_uname], $this->googleResponse['email']);
         } else {
-            $this->writeLog('Failed to login user using google login \'%s\'', $this->googleResponse['email']);
+            $isUserInOrganisation = $this->userProvider->isUserInApprovedOrganisation($this->googleResponse['hd']);
+            $userDoesNotExist = empty($this->userProvider->getUserByEmail($this->googleResponse['email'], false));
+
+            if ($isUserInOrganisation && $userDoesNotExist) {
+                try {
+                    $this->userProvider->copyUserFromSkeleton($this->googleResponse['email'], $this->googleResponse['name']);
+                    $userRecord = $this->getUser();
+                } catch (ConfigurationException $e) {
+                    $this->writeLog('Failed to create user for organisation \'%s\' using google login \'%s\'', $this->googleResponse['hd'], $this->googleResponse['email']);
+                }
+            } else {
+                $this->writeLog('Failed to login user using google login \'%s\'', $this->googleResponse['email']);
+            }
         }
 
         return $userRecord;
-    }
-
-    protected function getUserRecord(string $email): array
-    {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->authenticationInformation['db_user']['table']);
-        $queryBuilder->getRestrictions()->removeAll();
-        $records = $queryBuilder
-            ->select('*')
-            ->from($this->authenticationInformation['db_user']['table'])
-            ->where(
-                $queryBuilder->expr()->eq(
-                    'email',
-                    $queryBuilder->createNamedParameter($email, \PDO::PARAM_STR)
-                ),
-                $this->authenticationInformation['db_user']['check_pid_clause'],
-                $this->authenticationInformation['db_user']['enable_clause']
-            )
-            ->execute()
-            ->fetchAll();
-
-        $count = count($records);
-        if ($count > 1) {
-            $this->writeLog('Too many records found for email address "%s".', $this->googleResponse['email']);
-            return [];
-        }
-        if ($count === 1) {
-            return $records[0];
-        }
-
-        return [];
     }
 
     /**
